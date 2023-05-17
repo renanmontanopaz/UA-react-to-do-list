@@ -1,36 +1,21 @@
 import styles from './index.module.css';
 import Plus from '../../assets/plus.svg';
 import { NoContent } from '../NoContent';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { TodoList } from '../TodoList';
 import { Task } from '../../models/Task';
 import { v4 as uuidv4 } from 'uuid';
-
+import { api } from '../../configs/api';
 
 export const Content = () => {
-    // Variavéis de estado no react
-    // const [nomeState, setNomeState] = useState<string>("Cesar");
-
     const [description, setDescription] = useState<string>("");
+    const [tasksList, setTasksList] = useState<Task[]>([]);
 
-    const [tasksList, setTasksList] = useState<Task[]>([
-        {
-            id: "1",
-            description: `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Excepturi recusandae quas repellat culpa amet incidunt necessitatibus odit aspernatur modi? Doloribus vel error earum debitis exercitationem libero facilis eligendi magnam repellendus!`,
-            isDone: false
-        },
-        {
-            id: "2",
-            description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt quod repellat aperiam. Quia, odio? Praesentium error voluptate delectus ipsa est sed. Necessitatibus, quibusdam! Sit dolorem provident obcaecati ex ullam est.`,
-            isDone: false
-        },
-        {
-            id: "3",
-            description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt, maiores laboriosam praesentium nihil autem nemo quam ullam laborum fugiat sapiente soluta dolor accusamus minima voluptatum laudantium, ipsum explicabo id accusantium?`,
-            isDone: true
-        },
+    const tasksDone = tasksList.filter((task) => {
+        return task.isDone !== false;
+    })
 
-    ]);
+    const disabledButton = !description.length;
 
     const addTaskOnList = () => {
 
@@ -41,11 +26,32 @@ export const Content = () => {
         }
 
         setTasksList((currentValue) => [...currentValue, newTask]);
+        setDescription('');
     }
 
     const removeTaskOnList = (id: string) => {
         setTasksList((currentValue) => currentValue.filter(task => task.id !== id))
     }
+
+    const changeStatusCheckbox = (id: string) => {
+        const xebas = tasksList.map((task) => {
+            if (task.id === id) {
+                return {
+                    ...task,
+                    isDone: !task.isDone
+                }
+            }
+            return task;
+        });
+
+        setTasksList(xebas);
+    }
+
+    useEffect(() => {
+        api.get("tasks").then((response) => setTasksList(response.data as Task[]));
+    }, []);
+
+
 
     return (
         <section className={styles.section_container}>
@@ -55,9 +61,13 @@ export const Content = () => {
                     <input
                         className={styles.input}
                         type="text"
+                        value={description}
                         placeholder="Adicione uma nova tarefa"
                         onChange={(event: ChangeEvent<HTMLInputElement>) => setDescription(event.target.value)} />
-                    <button className={styles.button} onClick={() => addTaskOnList()} >
+                    <button
+                        className={styles.button}
+                        disabled={disabledButton}
+                        onClick={() => addTaskOnList()} >
                         Criar
                         <img
                             src={Plus}
@@ -68,15 +78,18 @@ export const Content = () => {
                 <article className={styles.content_header}>
                     <article className={styles.tasks_container}>
                         <p className={styles.tasks_created}>Tarefas Criadas</p>
-                        <span className={styles.span_value} >0</span>
+                        <span className={styles.span_value}>{tasksList.length}</span>
                     </article>
                     <article className={styles.tasks_container}>
                         <p className={styles.tasks_done}>Concluídas</p>
-                        <span className={styles.span_value}>0</span>
+                        <span className={styles.span_value}> {tasksDone.length} de {tasksList.length} </span>
                     </article>
                 </article>
 
-                {tasksList.length === 0 ? <NoContent /> : <TodoList onDelete={removeTaskOnList} list={tasksList} />}
+                {tasksList.length === 0 ? <NoContent /> : <TodoList
+                    onDelete={removeTaskOnList}
+                    onChangeCheckbox={changeStatusCheckbox}
+                    list={tasksList} />}
 
             </main>
         </section>

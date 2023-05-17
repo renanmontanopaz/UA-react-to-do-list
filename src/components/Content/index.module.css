@@ -27,6 +27,14 @@
     border-radius: 8px;
 }
 
+.input:focus {
+    filter: brightness(1.25);
+}
+
+.input:focus-visible {
+    outline: 2px solid var(--purple-dark);
+}
+
 .button {
 
     display: flex;
@@ -46,7 +54,12 @@
 }
 
 .button:hover {
-    filter: brightness(1.5);
+    filter: brightness(1.25);
+}
+
+.button:disabled {
+    filter: grayscale(100%);
+    cursor: not-allowed;
 }
 
 .content_header {

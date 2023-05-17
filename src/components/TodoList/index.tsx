@@ -5,9 +5,10 @@ import styles from './index.module.css';
 interface TodoListProps {
     list: Task[];
     onDelete: (id: string) => void;
+    onChangeCheckbox: (id: string) => void;
 }
 
-export const TodoList = ({ list, onDelete }: TodoListProps) => {
+export const TodoList = ({ list, onDelete, onChangeCheckbox }: TodoListProps) => {
     return (
         <section className={styles.section_container}>
             {list.map((task) => (
@@ -16,8 +17,9 @@ export const TodoList = ({ list, onDelete }: TodoListProps) => {
                     <input
                         type="checkbox"
                         id={task.id}
+                        onChange={() => onChangeCheckbox(task.id)}
                         defaultChecked={task.isDone} />
-                    <p className={styles.text}>{task.description}</p>
+                    <p className={task.isDone ? styles.text_scratched : styles.text}>{task.description}</p>
                     <img
                         className={styles.img}
                         src={Trash}

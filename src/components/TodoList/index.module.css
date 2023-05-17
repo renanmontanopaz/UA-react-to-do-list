@@ -33,6 +33,13 @@
 
 }
 
+.text_scratched {
+    text-decoration: line-through;
+    color: var(--gray-300);
+    min-width: 660px;
+    font-size: 14px;
+}
+
 .img {
     width: auto;
     padding: 6px;
@@ -47,7 +54,6 @@
 
 input[type="checkbox"] {
     appearance: none;
-    background-color: #fff;
     margin: 0;
     font: inherit;
     color: var(--blue-dark);
@@ -90,4 +96,8 @@ input[type="checkbox"]:checked::after {
     transform-origin: bottom left;
     transform: rotate(45deg);
     color: white;
+}
+
+input[type="checkbox"]:hover {
+    filter: brightness(1.15);
 }
