@@ -1,5 +1,5 @@
 .section_container {
-    background: var(--purple-dark);
+    background: var(--gray-600);
     min-height: calc(100vh - 200px);
     padding-bottom: 70px;
 
