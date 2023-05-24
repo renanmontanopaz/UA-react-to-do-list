@@ -1,14 +1,14 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import Plus from "../../assets/plus.svg";
-import useToDoContext from "../../hooks/useToDoContext";
-import { useToast } from "../../hooks/useToast";
+import Plus from "../../../../assets/plus.svg";
+import useToDoContext from "../../../../hooks/useToDoContext";
+import { useToast } from "../../../../hooks/useToast";
 import {
   changeIsDone,
   createTask,
   deleteTask,
   getTasks,
-} from "../../services/task";
+} from "../../../../services/task";
 import { NoContent } from "../NoContent";
 import { TodoList } from "../TodoList";
 import styles from "./index.module.css";
