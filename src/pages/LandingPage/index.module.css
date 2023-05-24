@@ -2,14 +2,14 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    align-items: center;
     height: 100vh;
-
     background-color: var(--blue-dark);
-    padding: 0 15%;
-
     gap: 40px;
+}
 
-
+.title_container {
+    min-width: 1440px;
 }
 
 h1 {
