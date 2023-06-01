@@ -1,5 +1,8 @@
 import axios from "axios";
 
 export const api = axios.create({
-    baseURL: 'http://localhost:3333/'
+    baseURL: 'https://api.jsonserver.io/tasks',
+    headers: {
+        "X-Jsio-Token": "69008bbc053a751d077a2d69d13255ca"
+    }
 });
