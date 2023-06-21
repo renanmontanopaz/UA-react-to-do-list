@@ -7,10 +7,9 @@ import { BrowserRouter } from 'react-router-dom';
 describe('<LandingPage>', () => {
 
   beforeAll(() => {
-    const { debug } = render(<LandingPage />, {
+    render(<LandingPage />, {
       wrapper: BrowserRouter
     });
-    debug();
   })
 
   it('Deve conter um título na tag h1 "To do list"', async () => {

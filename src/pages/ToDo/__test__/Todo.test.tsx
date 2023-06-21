@@ -5,10 +5,8 @@ import { BrowserRouter } from "react-router-dom";
 
 describe("<Todo />", () => {
   beforeAll(() => {
-    const { debug } = render(<ToDo />, { wrapper: BrowserRouter })
-    debug();
+    render(<ToDo />, { wrapper: BrowserRouter })
   })
-
   it("Deve renderizar o header corretamente", () => {
     const header = screen.getByTestId("header");
     expect(header).not.toBeNull();
