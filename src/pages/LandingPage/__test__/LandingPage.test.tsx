@@ -26,6 +26,4 @@ describe('<LandingPage>', () => {
     const link = screen.getByRole("link", { name: /Capa do sistema/i });
     expect(link.getAttribute("href")).toBe("/to-do");
   })
-
-
 }) 
