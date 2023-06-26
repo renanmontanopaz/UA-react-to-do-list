@@ -1,5 +1,4 @@
 import { beforeAll, describe, expect, it } from 'vitest';
-
 import { render, screen } from '@testing-library/react';
 import LandingPage from '..';
 import { BrowserRouter } from 'react-router-dom';

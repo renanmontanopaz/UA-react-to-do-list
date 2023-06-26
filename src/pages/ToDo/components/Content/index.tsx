@@ -71,10 +71,11 @@ export const Content = () => {
   }, [setTaskListState]);
 
   return (
-    <section data-testid="content" className={styles.section_container}>
+    <section data-testid="content-name" className={styles.section_container}>
       <main>
         <article className={styles.input_container}>
           <input
+            data-testid="input-name"
             className={styles.input}
             type="text"
             value={description}
@@ -84,6 +85,7 @@ export const Content = () => {
             }
           />
           <button
+            data-testid="button-name"
             className={styles.button}
             disabled={disabledButton}
             onClick={addTaskOnList}

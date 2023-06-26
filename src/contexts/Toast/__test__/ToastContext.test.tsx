@@ -36,7 +36,6 @@ describe("<ToastContext>", () => {
 
       const toastElement = await screen
         .findByText(/Testando a exibição do toast/i);
-
       expect(toastElement).not.toBeNull();
     })
   })
