@@ -84,7 +84,7 @@ describe('<Content> o página ToDo não pode ter nenhuma task na lista ao inicia
         beforeEach(() => {
           cy.wait(1000);
         })
-        it('Deve excluir a task com nome "task" ao clicar no ícone de lixeira', () => {
+        it('Deve excluir as tasks ao clicar no ícone de lixeira', () => {
           cy.get(':nth-child(1) > ._span_value_x3dtl_191').invoke('text')
             .then(text => {
               const value = parseInt(text)
